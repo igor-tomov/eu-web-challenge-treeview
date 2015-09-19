@@ -9,7 +9,7 @@ export default {
     if ( typeof Response === 'function' ){
       return new Response( text ).json();
     }else{
-      return new Promise( resolve, reject => {
+      return new Promise( ( resolve, reject ) => {
         let data;
 
         try {

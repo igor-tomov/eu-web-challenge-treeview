@@ -159,7 +159,7 @@ webpackJsonp([0],[
 	    if (typeof Response === 'function') {
 	      return new Response(text).json();
 	    } else {
-	      return new _promise2['default'](resolve, function (reject) {
+	      return new _promise2['default'](function (resolve, reject) {
 	        var data = undefined;
 	
 	        try {
