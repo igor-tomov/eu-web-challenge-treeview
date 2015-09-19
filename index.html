@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tree View based on Preorder tree traversal method</title>
+    <link rel="stylesheet" href="public/css/bootstrap.min.css">
+    <link rel="stylesheet" href="public/css/styles.css">
+</head>
+<body>
+  <header class="navbar navbar-default navbar-static-top">
+    <div class="container">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="javascript:void(0)">
+          <strong>EU Web Challenge</strong>
+        </a>
+      </div>
+      <div class="navbar-header navbar-right">
+        <span class="navbar-brand">
+          Tree View based on Preorder tree traversal method
+        </span>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="row app-wrapper">
+      <div class="col-xs-6">
+        <div id="json-tree-view" class="panel panel-primary json-tree-view">
+          <div class="panel-heading">Input data</div>
+          <div class="panel-body">
+            <form>
+              <textarea class="form-control json-placeholder" rows="25"></textarea>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-6">
+        <div class="panel panel-info svg-tree-wrapper">
+          <div class="panel-heading">SVG Tree Representation</div>
+          <div class="panel-body">
+            <div id="svg-tree-view" class="svg-tree-view"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!------------------------ App scripts ------------------------>
+  <script src="public/js/dist/vendors.bundle.js"></script>
+  <script src="public/js/dist/app.bundle.js"></script>
+  <!------------------------ END: App scripts ------------------------>
+</body>
+</html>

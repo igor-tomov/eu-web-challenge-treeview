@@ -1,0 +1,29 @@
+.app-wrapper .json-tree-view > .panel-body,
+.app-wrapper .svg-tree-wrapper > .panel-body
+{
+  padding: 0;
+}
+
+.app-wrapper .json-tree-view > .panel-body > form > .json-placeholder{
+  resize: vertical;
+  border: none;
+  border-radius: 0;
+}
+
+.app-wrapper .svg-tree-wrapper > .panel-body > .svg-tree-view .svg-container{
+  padding-left: 25px;
+}
+
+
+
+.app-wrapper .svg-tree-wrapper > .panel-body > .svg-tree-view .svg-container .tree-view-branch{
+  fill: none;
+  stroke: #aaa;
+  stroke-width: 2;
+  cursor: pointer;
+}
+
+.app-wrapper .svg-tree-wrapper > .panel-body > .svg-tree-view .svg-container .tree-view-title{
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+}
