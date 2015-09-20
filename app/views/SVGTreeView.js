@@ -8,6 +8,9 @@ export default Backbone.View.extend({
 
   el: '#svg-tree-view',
 
+  SVG_ROW_HEIGHT: 25,
+  SVG_ROW_OFFSET: 25,
+
 
 
   initialize: function(){
@@ -15,13 +18,17 @@ export default Backbone.View.extend({
   },
 
 
-
+  /**
+   * Model update listener
+   */
   onModelUpdate: function(){
     this.render();
   },
 
 
-
+  /**
+   * Render view according to current model state
+   */
   render: function(){
     let data = this.model.toJSON();
 
@@ -36,6 +43,11 @@ export default Backbone.View.extend({
 
 
 
+  /**
+   * Render SVG tree using preorder tree traversal method
+   *
+   * @param {Array} input
+   */
   renderTree: function( input ){
     // initialize SVG document
     var svg = SVG( this.el ).size( '100%', input.length * 30 );
@@ -52,6 +64,7 @@ export default Backbone.View.extend({
       return 0;
     });
 
+    // iterate through input array and build SVG tree
     input.forEach( ( item, i ) => {
       if (rightStack.length) {
         while (rightStack[rightStack.length - 1] < item.right) {
@@ -66,9 +79,18 @@ export default Backbone.View.extend({
   },
 
 
+
+  /**
+   * Render Tree node to supplied SVG document with an appropriate position
+   *
+   * @param {SVG.doc} doc
+   * @param {String} title
+   * @param {Number} offsetCount
+   * @param {Number} index
+   */
   renderSVGRow: function( doc, title, offsetCount, index ){
-    let height = 25,
-      offset = 25;
+    let height = this.SVG_ROW_HEIGHT,
+        offset = this.SVG_ROW_OFFSET;
 
     if ( offsetCount ){
       let i = offsetCount;
@@ -93,6 +115,7 @@ export default Backbone.View.extend({
        .dx( offset * offsetCount + 3 )
        .dy( index * height - 4 )
   },
+
 
 
   /**

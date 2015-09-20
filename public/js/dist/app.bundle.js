@@ -54,12 +54,25 @@ webpackJsonp([0],[
 	
 	var _backbone2 = _interopRequireDefault(_backbone);
 	
+	/**
+	 * Represents data of single tree node
+	 */
 	var TreeNodeModel = _backbone2['default'].Model.extend({
 	
 	  defaults: {
 	    name: 'Untitled',
 	    left: 0,
 	    right: 0
+	  },
+	
+	  validate: function validate(attrs) {
+	    if (!attrs.left || !attrs.right) {
+	      return "Required fields aren't provided";
+	    }
+	
+	    if (attrs.left > attrs.right) {
+	      return "'right' cannot be less than 'left'";
+	    }
 	  }
 	});
 	
@@ -98,7 +111,7 @@ webpackJsonp([0],[
 	  el: '#json-tree-view',
 	
 	  events: {
-	    'change': 'onInputChange'
+	    'input': 'onInputChange'
 	  },
 	
 	  TEXT_INPUT_SELECTOR: '.json-placeholder',
@@ -106,7 +119,7 @@ webpackJsonp([0],[
 	
 	  initialize: function initialize(options) {
 	    if (options.bootJSON) {
-	      this.$el.find(this.TEXT_INPUT_SELECTOR).val(JSON.stringify(options.bootJSON)).trigger("change");
+	      this.$el.find(this.TEXT_INPUT_SELECTOR).val(JSON.stringify(options.bootJSON)).trigger("input");
 	    }
 	  },
 	
@@ -114,6 +127,11 @@ webpackJsonp([0],[
 	    this.updateTree(event.target.value);
 	  },
 	
+	  /**
+	   * Update model state according to updated input data
+	   *
+	   * @param {String} content
+	   */
 	  updateTree: function updateTree(content) {
 	    var _this = this;
 	
@@ -125,9 +143,10 @@ webpackJsonp([0],[
 	    }
 	
 	    _utils2['default'].parseJSON(content).then(function (json) {
-	      return _this.model.reset(json);
+	      return _this.model.reset(json, { validate: true });
 	    }, function (reason) {
-	      return _this.$el.addClass(_this.INVALID_CONTENT_CLASS);
+	      _this.$el.addClass(_this.INVALID_CONTENT_CLASS);
+	      _this.model.reset();
 	    });
 	  }
 	});
@@ -153,6 +172,13 @@ webpackJsonp([0],[
 	var _promise2 = _interopRequireDefault(_promise);
 	
 	exports['default'] = {
+	
+	  /**
+	   * Parse supplied text to JSON and return result as Promise
+	   *
+	   * @param {String} text
+	   * @returns {Promise}
+	   */
 	  parseJSON: function parseJSON(text) {
 	    // Response() provides more efficient way of JSON parsing than JSON.parse()
 	    // So, try to use it where it's available
@@ -975,14 +1001,23 @@ webpackJsonp([0],[
 	
 	  el: '#svg-tree-view',
 	
+	  SVG_ROW_HEIGHT: 25,
+	  SVG_ROW_OFFSET: 25,
+	
 	  initialize: function initialize() {
 	    this.listenTo(this.model, "reset", this.onModelUpdate);
 	  },
 	
+	  /**
+	   * Model update listener
+	   */
 	  onModelUpdate: function onModelUpdate() {
 	    this.render();
 	  },
 	
+	  /**
+	   * Render view according to current model state
+	   */
 	  render: function render() {
 	    var data = this.model.toJSON();
 	
@@ -995,6 +1030,11 @@ webpackJsonp([0],[
 	    }
 	  },
 	
+	  /**
+	   * Render SVG tree using preorder tree traversal method
+	   *
+	   * @param {Array} input
+	   */
 	  renderTree: function renderTree(input) {
 	    var _this = this;
 	
@@ -1013,6 +1053,7 @@ webpackJsonp([0],[
 	      return 0;
 	    });
 	
+	    // iterate through input array and build SVG tree
 	    input.forEach(function (item, i) {
 	      if (rightStack.length) {
 	        while (rightStack[rightStack.length - 1] < item.right) {
@@ -1026,9 +1067,17 @@ webpackJsonp([0],[
 	    });
 	  },
 	
+	  /**
+	   * Render Tree node to supplied SVG document with an appropriate position
+	   *
+	   * @param {SVG.doc} doc
+	   * @param {String} title
+	   * @param {Number} offsetCount
+	   * @param {Number} index
+	   */
 	  renderSVGRow: function renderSVGRow(doc, title, offsetCount, index) {
-	    var height = 25,
-	        offset = 25;
+	    var height = this.SVG_ROW_HEIGHT,
+	        offset = this.SVG_ROW_OFFSET;
 	
 	    if (offsetCount) {
 	      var i = offsetCount;

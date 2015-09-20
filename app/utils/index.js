@@ -3,6 +3,13 @@ import Promise from 'promise';
 
 
 export default {
+
+  /**
+   * Parse supplied text to JSON and return result as Promise
+   *
+   * @param {String} text
+   * @returns {Promise}
+   */
   parseJSON: function( text ){
     // Response() provides more efficient way of JSON parsing than JSON.parse()
     // So, try to use it where it's available

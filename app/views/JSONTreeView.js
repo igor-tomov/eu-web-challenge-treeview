@@ -7,7 +7,7 @@ export default Backbone.View.extend({
   el: '#json-tree-view',
 
   events: {
-    'change': 'onInputChange'
+    'input': 'onInputChange'
   },
 
   TEXT_INPUT_SELECTOR: '.json-placeholder',
@@ -20,7 +20,7 @@ export default Backbone.View.extend({
       this.$el
           .find( this.TEXT_INPUT_SELECTOR )
           .val( JSON.stringify( options.bootJSON ) )
-          .trigger("change");
+          .trigger("input");
     }
   },
 
@@ -31,7 +31,11 @@ export default Backbone.View.extend({
   },
 
 
-
+  /**
+   * Update model state according to updated input data
+   *
+   * @param {String} content
+   */
   updateTree: function( content ){
     this.$el.removeClass( this.INVALID_CONTENT_CLASS );
 
@@ -42,8 +46,11 @@ export default Backbone.View.extend({
 
     utils.parseJSON( content )
          .then(
-            json => this.model.reset( json ),
-            reason => this.$el.addClass( this.INVALID_CONTENT_CLASS )
+            json   => this.model.reset( json, { validate: true } ),
+            reason => {
+              this.$el.addClass( this.INVALID_CONTENT_CLASS );
+              this.model.reset();
+            }
           );
   }
 });
