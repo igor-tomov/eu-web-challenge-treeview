@@ -104,7 +104,7 @@
 
 	__webpack_require__(/*! jquery */4);
 	__webpack_require__(/*! backbone */2);
-	module.exports = __webpack_require__(/*! svg.js */18);
+	module.exports = __webpack_require__(/*! svg.js */17);
 
 
 /***/ },
@@ -12792,7 +12792,7 @@
 
 /***/ },
 
-/***/ 18:
+/***/ 17:
 /*!******************************!*\
   !*** ./~/svg.js/dist/svg.js ***!
   \******************************/

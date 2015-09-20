@@ -24,7 +24,7 @@ webpackJsonp([0],[
 	
 	var _viewsSVGTreeView2 = _interopRequireDefault(_viewsSVGTreeView);
 	
-	var _configDemoJson = __webpack_require__(/*! ./config/demo.json */ 17);
+	var _configDemoJson = __webpack_require__(/*! ./config/demo.json */ 18);
 	
 	var _configDemoJson2 = _interopRequireDefault(_configDemoJson);
 	
@@ -989,7 +989,7 @@ webpackJsonp([0],[
 	
 	var _backbone2 = _interopRequireDefault(_backbone);
 	
-	var _svgJs = __webpack_require__(/*! svg.js */ 18);
+	var _svgJs = __webpack_require__(/*! svg.js */ 17);
 	
 	var _svgJs2 = _interopRequireDefault(_svgJs);
 	
@@ -1109,7 +1109,8 @@ webpackJsonp([0],[
 	module.exports = exports['default'];
 
 /***/ },
-/* 17 */
+/* 17 */,
+/* 18 */
 /*!******************************!*\
   !*** ./app/config/demo.json ***!
   \******************************/
