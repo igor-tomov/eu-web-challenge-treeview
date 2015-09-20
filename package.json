@@ -4,6 +4,7 @@
   "description": "Task implementation for the Qualification stage of EU Web Challenge",
   "main": "index.js",
   "scripts": {
+    "start": "node_modules/webpack/bin/webpack.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -22,7 +23,6 @@
     "backbone": "^1.2.3",
     "bootstrap": "^3.3.5",
     "css-loader": "^0.18.0",
-    "extract-text-webpack-plugin": "^0.8.2",
     "jquery": "^2.1.4",
     "json-loader": "^0.5.3",
     "promise": "^7.0.4",
